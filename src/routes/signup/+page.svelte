@@ -3,30 +3,35 @@
   
   const dispatch = createEventDispatcher();
   
+  let name = '';
   let email = '';
   let password = '';
-  let rememberMe = false;
+  let confirmPassword = '';
   let loading = false;
   let errorMessage = '';
   
   function handleSubmit() {
+    if (password !== confirmPassword) {
+      errorMessage = 'Passwords do not match';
+      return;
+    }
+    
     loading = true;
     errorMessage = '';
     
-    // Simulate API call
     setTimeout(() => {
       loading = false;
-      
-      dispatch('login', { email });
+            dispatch('signup', { name, email });
     }, 1000);
   }
   
+
 </script>
 
-<div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+<div class="min-h-screen  flex flex-col justify-center py-12 sm:px-6 lg:px-8">
   <div class="sm:mx-auto sm:w-full sm:max-w-md">
     <h2 class="mt-6 text-center text-3xl font-extrabold text-green-500">
-      Sign In 
+      Create your account
     </h2>
   </div>
 
@@ -43,6 +48,23 @@
           </div>
         {/if}
         
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700">
+            Full name
+          </label>
+          <div class="mt-1">
+            <input
+              id="name"
+              name="name"
+              type="text"
+              autocomplete="name"
+              required
+              bind:value={name}
+              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+            />
+          </div>
+        </div>
+
         <div>
           <label for="email" class="block text-sm font-medium text-gray-700">
             Email address
@@ -69,7 +91,7 @@
               id="password"
               name="password"
               type="password"
-              autocomplete="current-password"
+              autocomplete="new-password"
               required
               bind:value={password}
               class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
@@ -77,27 +99,20 @@
           </div>
         </div>
 
-        <div class="flex items-center justify-between">
-          <div class="flex items-center">
+        <div>
+          <label for="confirm-password" class="block text-sm font-medium text-gray-700">
+            Confirm Password
+          </label>
+          <div class="mt-1">
             <input
-              id="remember-me"
-              name="remember-me"
-              type="checkbox"
-              bind:checked={rememberMe}
-              class="h-4 w-4 text-green-600 focus:green-blue-500 border-gray-300 rounded"
+              id="confirm-password"
+              name="confirm-password"
+              type="password"
+              autocomplete="new-password"
+              required
+              bind:value={confirmPassword}
+              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
             />
-            <label for="remember-me" class="ml-2 block text-sm text-gray-900">
-              Remember me
-            </label>
-          </div>
-
-          <div class="text-sm">
-            <a 
-              href="/forgotPassword" 
-              class="font-medium text-green-500"
-            >
-              Forgot your password?
-            </a>
           </div>
         </div>
 
@@ -105,7 +120,7 @@
           <button
             type="submit"
             disabled={loading}
-            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-400 hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50"
+            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white cursor-pointer bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50"
           >
             {#if loading}
               <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -114,7 +129,7 @@
               </svg>
               Processing...
             {:else}
-              Sign in
+              Sign up
             {/if}
           </button>
         </div>
@@ -134,12 +149,12 @@
 
         <div class="mt-6">
           <p class="text-center text-sm text-gray-600">
-            Don't have an account?
+            Already have an account?
             <a 
-              href="/signup" 
+              href="/form" 
               class="font-medium text-green-500"
             >
-              Sign up
+              Sign in
             </a>
           </p>
         </div>

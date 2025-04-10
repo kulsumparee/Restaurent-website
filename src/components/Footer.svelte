@@ -23,7 +23,7 @@
                 >
                 <span>OODI</span>
             </h1>
-            <p class="py-8 text-gray-600 text-lg w-52">
+            <p class="py-8 text-gray-600 text-lg w-52 mx-auto md:mx-0">
                 Savor the artistry where every dish is a culinary masterpiece
             </p>
         </div>

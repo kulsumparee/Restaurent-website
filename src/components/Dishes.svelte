@@ -87,7 +87,6 @@ function addToCart(item) {
         return items;
     });
 
-
         menuItems = menuItems.map((i) =>
             i.id === item.id ? { ...i, isAdded: !i.isAdded } : i,
         );
@@ -97,7 +96,6 @@ function addToCart(item) {
         messageTimeout = setTimeout(() => (showMessage = false), 2000);
     }
 
-    //carocel js
     function prev() {
         currentIndex = Math.max(currentIndex - 1, 0);
     }
@@ -111,7 +109,6 @@ function addToCart(item) {
 </script>
 
 <Wrapper>
-    <!-- "Product added" message -->
     {#if showMessage}
         <div
             class="fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg"
@@ -132,7 +129,6 @@ function addToCart(item) {
             <h1 class="text-2xl md:text-4xl font-bold py-4 w-2xs leading-12">
                 Standout Dishes From Our Menu
             </h1>
-            <!-- Navigation Buttons -->
             <div class="flex gap-5">
                 <button
                     on:click={prev}
@@ -162,7 +158,6 @@ function addToCart(item) {
                         <div
                             class="w-full h-full bg-white shadow shadow-[#0000001A] rounded-2xl overflow-hidden cursor-pointer"
                         >
-                            <!-- Add to Cart Button -->
                             <button
                                 class="addtocart cursor-pointer bg-green-400 h-11 w-14 items-center flex justify-center rounded-br-2xl text-center"
                                 on:click={() => addToCart(item)}
